@@ -56,6 +56,27 @@ LANGUAGES = {
     'cy' : 'Welsh'
 }
 
+class Producer(models.Model):
+	name = models.CharField(max_length=50)
+
+
+class Production(models.Model):
+	producer = models.ForeignKey('Producer')
+	name = models.CharField(max_length=50)
+
+
+class Phrase(models.Model):
+	text = models.CharField(max_length=100)
+	lang = models.CharField(max_length=2)
+	variation = models.CharField(max_length=3)
+
+
+class PhraseAudio(models.Model):
+	phrase = models.ForeignKey('Phrase')
+
+
+class Relation(models.Model):
+	pass
 
 
 
