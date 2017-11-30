@@ -56,27 +56,66 @@ LANGUAGES = {
     'cy' : 'Welsh'
 }
 
+STATUS_CHOICES = (
+    (0, 'Inactivo'),
+    (1, 'Activo'),
+)
+
 class Producer(models.Model):
 	name = models.CharField(max_length=50)
 
+    # extras
+    created_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now_add=True)
+    status = models.SmallIntegerField(choices=STATUS_CHOICES)
 
 class Production(models.Model):
-	producer = models.ForeignKey('Producer')
+    name = models.CharField(max_length=50)
+
+class Season(models.Model):
+    producer = models.ForeignKey('Production')
+
+
+class Episode(models.Model):
+	season = models.ForeignKey('Season')
 	name = models.CharField(max_length=50)
 
+    # extras
+    created_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now_add=True)
+    status = models.SmallIntegerField(choices=STATUS_CHOICES)
 
 class Phrase(models.Model):
 	text = models.CharField(max_length=100)
 	lang = models.CharField(max_length=2)
 	variation = models.CharField(max_length=3)
 
+    # extras
+    created_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now_add=True)
+    status = models.SmallIntegerField(choices=STATUS_CHOICES)
+
 
 class PhraseAudio(models.Model):
 	phrase = models.ForeignKey('Phrase')
+    path_file = models.CharField(max_length=100)
+    robotic = models.BoolField(default=True)
+    robotic_speed = models.SmallIntegerField()
+
+    # extras
+    created_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now_add=True)
+    status = models.SmallIntegerField(choices=STATUS_CHOICES)
 
 
-class Relation(models.Model):
-	pass
+class RelationPhrase(models.Model):
+    episode = models.ForeignKey('Episode')
+    phrase = models.ForeignKey('Phrase')
+    order = models.SmallIntegerField()
+
+    created_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now_add=True)
+    status = models.SmallIntegerField(choices=STATUS_CHOICES)	
 
 
 
