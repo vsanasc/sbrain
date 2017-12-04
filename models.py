@@ -115,7 +115,13 @@ class RelationPhrase(models.Model):
 
     created_at = models.DateTimeField(auto_now=True)
     modified_at = models.DateTimeField(auto_now_add=True)
-    status = models.SmallIntegerField(choices=STATUS_CHOICES)	
+    status = models.SmallIntegerField(choices=STATUS_CHOICES)
+
+
+class Generator(models.Model):
+    
+    repeat = models.SmallIntegerField()
+
 
 
 
