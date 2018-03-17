@@ -12,7 +12,7 @@ class CategoryTypeExpense(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 
@@ -24,10 +24,12 @@ class TypeExpense(models.Model):
 	name = models.CharField(
 			max_length=100
 		)
-	description = models.TextField(
+	note = models.CharField(
+			max_length=200,
 			blank=True
 		)
-	rank = models.PositiveSmallIntegerField(
+	importance = models.PositiveSmallIntegerField(
+		help_text='How much is important this expense for you. Min:1 - Max:10',
 		default=5,
 		validators=[MaxValueValidator(10), MinValueValidator(1)]
 	)
@@ -35,7 +37,7 @@ class TypeExpense(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 
