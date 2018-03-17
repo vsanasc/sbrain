@@ -100,7 +100,7 @@ ENV/
 # mypy
 .mypy_cache/
 
-
+*.zip
 *.sqlite3
 local_settings.py
 
