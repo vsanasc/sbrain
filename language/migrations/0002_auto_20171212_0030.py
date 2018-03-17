@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0001_initial'),
+        ('language', '0001_initial'),
     ]
 
     operations = [
@@ -19,15 +19,6 @@ class Migration(migrations.Migration):
                 ('repeat', models.SmallIntegerField()),
                 ('translate_repeat', models.SmallIntegerField()),
                 ('random', models.BooleanField()),
-            ],
-        ),
-        migrations.CreateModel(
-            name='UserApp',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=20)),
-                ('last_name', models.CharField(max_length=20)),
-                ('email', models.CharField(max_length=40)),
             ],
         ),
         migrations.AddField(
