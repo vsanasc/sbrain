@@ -23,6 +23,7 @@ SECRET_KEY = 'yasf1ys-$3mb=5yi=p4_bbx2lmtt37pjdv6x!4ftf=g)vc%wrx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.getenv('DEBUG', 'True'))
+SECURE_PROXY_SSL_HEADER = (‘HTTP_X_FORWARDED_PROTO’, ‘https’)
 
 ALLOWED_HOSTS = []
 
@@ -30,7 +31,6 @@ allowed = os.getenv('ALLOWED_HOSTS', None)
 
 if allowed:
     ALLOWED_HOSTS = os.environ['HOME'].split(' ')
-
 
 # Application definition
 
@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'language',
     'rest_framework',
+    'language.apps.AppConfig',
+    'finance.apps.AppConfig',
 ]
 
 MIDDLEWARE = [
@@ -75,10 +76,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
 
 DATABASES = {
     'default': {
@@ -128,7 +127,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -141,6 +139,9 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+print(ALLOWED_HOSTS)
+print(DEBUG)
 
 try:
     from .local_settings import *
