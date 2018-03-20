@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'language.apps.AppConfig',
-    'finance.apps.AppConfig',
+    'language.apps.LanguageConfig',
+    'finance.apps.FinanceConfig',
 ]
 
 MIDDLEWARE = [
