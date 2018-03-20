@@ -15,10 +15,10 @@ class ExpenseAdmin(admin.ModelAdmin):
             # import pdb; pdb.set_trace()
             kwargs['queryset'] = TypeExpense.objects.filter(user=request.user)
 
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+        return super(ExpenseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_queryset(self, request):
-        qs = super().get_queryset(request)
+        qs = super(ExpenseAdmin, self).get_queryset(request)
 
         if not request.user.is_superuser:
             return qs.filter(user=request.user).order_by('-date')
@@ -27,4 +27,4 @@ class ExpenseAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
-        super().save_model(request, obj, form, change)
+        super(ExpenseAdmin, self).save_model(request, obj, form, change)

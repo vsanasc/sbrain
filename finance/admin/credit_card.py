@@ -11,10 +11,10 @@ class CreditCardAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
-        super().save_model(request, obj, form, change)
+        super(CreditCardAdmin, self).save_model(request, obj, form, change)
 
     def get_queryset(self, request):
-        qs = super().get_queryset(request)
+        qs = super(CreditCardAdmin, self).get_queryset(request)
         if not request.user.is_superuser:
             return qs.filter(user=request.user)
 
@@ -28,10 +28,10 @@ class CreditCardBillAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
-        super().save_model(request, obj, form, change)
+        super(CreditCardBillAdmin, self).save_model(request, obj, form, change)
 
     def get_queryset(self, request):
-        qs = super().get_queryset(request)
+        qs = super(CreditCardBillAdmin, self).get_queryset(request)
         if not request.user.is_superuser:
             return qs.filter(user=request.user)
 

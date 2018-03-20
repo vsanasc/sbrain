@@ -10,7 +10,7 @@ class IncomeAdmin(admin.ModelAdmin):
     list_display = ('name', 'value', 'date',)
 
     def get_queryset(self, request):
-        qs = super().get_queryset(request)
+        qs = super(IncomeAdmin, self).get_queryset(request)
 
         if not request.user.is_superuser:
             return qs.filter(user=request.user)
@@ -19,4 +19,4 @@ class IncomeAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
-        super().save_model(request, obj, form, change)
+        super(IncomeAdmin, self).save_model(request, obj, form, change)
