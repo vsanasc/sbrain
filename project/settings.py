@@ -105,9 +105,10 @@ if 'TRAVIS' in os.environ:
         }
     }
 
-if DEBUG == False:
+if not DEBUG:
+
     import raven
-    
+
     RAVEN_CONFIG = {
         'dsn': 'https://790ceadf533f477a93705847e40eaa6d:9b2c756e27ac43b6b7341d5cefbb07bd@sentry.io/328879',
         # If you are using git, you can also automatically configure the
