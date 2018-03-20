@@ -6,14 +6,14 @@ from finance.models import CreditCard, CreditCardBill
 @admin.register(CreditCard)
 class CreditCardAdmin(admin.ModelAdmin):
 	exclude = ('user',)
-	list_display = ('name','type','limit',)
+	list_display = ('name', 'type', 'currency', 'limit',)
 
 	def save_model(self, request, obj, form, change):
 		obj.user = request.user
 		super().save_model(request, obj, form, change)
 
 	def get_queryset(self, request):
-		qs = super(CreditCardAdmin, self).get_queryset(request)
+		qs = super().get_queryset(request)
 		if not request.user.is_superuser:
 			return qs.filter(user=request.user)
 
@@ -30,7 +30,7 @@ class CreditCardBillAdmin(admin.ModelAdmin):
 		super().save_model(request, obj, form, change)
 
 	def get_queryset(self, request):
-		qs = super(CreditCardBillAdmin, self).get_queryset(request)
+		qs = super().get_queryset(request)
 		if not request.user.is_superuser:
 			return qs.filter(user=request.user)
 
