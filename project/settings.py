@@ -22,16 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yasf1ys-$3mb=5yi=p4_bbx2lmtt37pjdv6x!4ftf=g)vc%wrx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ['DEBUG']) if 'DEBUG' in os.environ else False
+DEBUG = os.environ['DEBUG'] == 'True' if 'DEBUG' in os.environ else False
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = []
 
-allowed = os.getenv('ALLOWED_HOSTS', None)
-
 if 'ALLOWED_HOSTS' in os.environ:
-    ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(' ')
+    ALLOWED_HOSTS += os.environ['ALLOWED_HOSTS'].split(' ')
 
 # Application definition
 
