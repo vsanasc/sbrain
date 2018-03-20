@@ -23,7 +23,7 @@ SECRET_KEY = 'yasf1ys-$3mb=5yi=p4_bbx2lmtt37pjdv6x!4ftf=g)vc%wrx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.getenv('DEBUG', 'True'))
-SECURE_PROXY_SSL_HEADER = (‘HTTP_X_FORWARDED_PROTO’, ‘https’)
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = []
 
