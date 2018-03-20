@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now=True)),
                 ('modified_at', models.DateTimeField(auto_now_add=True)),
                 ('status', models.SmallIntegerField(choices=[(0, 'Inactive'), (1, 'Active')])),
-                ('phrase', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.Phrase')),
+                ('phrase', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='language.Phrase')),
             ],
         ),
         migrations.CreateModel(
@@ -72,20 +72,20 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now=True)),
                 ('modified_at', models.DateTimeField(auto_now_add=True)),
                 ('status', models.SmallIntegerField(choices=[(0, 'Inactive'), (1, 'Active')])),
-                ('episode', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.Episode')),
-                ('phrase', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.Phrase')),
+                ('episode', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='language.Episode')),
+                ('phrase', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='language.Phrase')),
             ],
         ),
         migrations.CreateModel(
             name='Season',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('producer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.Production')),
+                ('producer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='language.Production')),
             ],
         ),
         migrations.AddField(
             model_name='episode',
             name='season',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.Season'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='language.Season'),
         ),
     ]

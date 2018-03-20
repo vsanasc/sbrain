@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -23,22 +22,28 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yasf1ys-$3mb=5yi=p4_bbx2lmtt37pjdv6x!4ftf=g)vc%wrx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['DEBUG'] == 'True' if 'DEBUG' in os.environ else False
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = []
 
+if 'ALLOWED_HOSTS' in os.environ:
+    ALLOWED_HOSTS += os.environ['ALLOWED_HOSTS'].split(' ')
 
 # Application definition
 
 INSTALLED_APPS = [
+    'raven.contrib.django.raven_compat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'language',
     'rest_framework',
+    'language.apps.LanguageConfig',
+    'finance.apps.FinanceConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -82,6 +86,35 @@ DATABASES = {
     }
 }
 
+DATABASE_URL = os.getenv('DATABASE_URL', None)
+
+if DATABASE_URL:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
+
+if 'TRAVIS' in os.environ:
+
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'travisdb',
+            'USER':     'postgres',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
+    }
+
+if not DEBUG:
+
+    import raven
+
+    RAVEN_CONFIG = {
+        'dsn': 'https://790ceadf533f477a93705847e40eaa6d:9b2c756e27ac43b6b7341d5cefbb07bd@sentry.io/328879',
+        # If you are using git, you can also automatically configure the
+        # release based on the git info.
+        'release': raven.fetch_git_sha(BASE_DIR),
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -101,7 +134,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -115,15 +147,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+# )
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 try:
     from .local_settings import *
 except ImportError as e:
     pass
-
-

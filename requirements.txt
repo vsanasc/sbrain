@@ -1,0 +1,18 @@
+# Frameworks
+Django==2.0
+djangorestframework==3.7.3
+# Markdown==2.6.10
+
+# Database
+dj-database-url==0.5.0
+psycopg2-binary==2.7.4
+
+# Error reporting
+raven==6.6.0
+
+# Filters
+django-filter==1.1.0
+
+# Production
+gunicorn==19.7.1
+whitenoise==3.3.1

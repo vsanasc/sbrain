@@ -1,0 +1,29 @@
+language: python
+
+python:
+  - 3.6
+
+services: postgresql
+
+env:
+  - DJANGO_SETTINGS_MODULE=project.settings
+
+before_install:
+  - export PYTHONPATH=$HOME/builds/sbrainproject/sbrain
+  - export PIP_USE_MIRRORS=true
+
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
+
+before_script:
+  - psql -c "CREATE DATABASE travisdb;" -U postgres
+
+script:
+  - python manage.py makemigrations
+  - python manage.py migrate
+  - gunicorn project.wsgi &
+  - coverage run --source . manage.py test
+
+after_success:
+  - coveralls

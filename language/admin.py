@@ -1,8 +1,16 @@
 from django.contrib import admin
 
-from .models import *
+from language.models import (
+    Generator,
+    Phrase,
+    PhraseAudio,
+    RelationPhrase,
+    Producer,
+    Production,
+    Season,
+    Episode
+)
 
-# Register your models here.
 admin.site.register(Generator)
 admin.site.register(Phrase)
 admin.site.register(PhraseAudio)
