@@ -91,6 +91,19 @@ if DATABASE_URL:
     import dj_database_url
     DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
 
+if 'TRAVIS' in os.environ:
+
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'travisdb',
+            'USER':     'postgres',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
+    }
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
