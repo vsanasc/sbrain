@@ -21,5 +21,6 @@ before_script:
   - psql -c "CREATE DATABASE travisdb;" -U postgres
 
 script:
-  - python manage.py makemigrations --empty
+  - python manage.py makemigrations
+  - python manage.py migrate
   - gunicorn project.wsgi &
