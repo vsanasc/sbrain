@@ -3,19 +3,19 @@ from django.contrib import admin
 from finance.models import Expense
 from finance.models import TypeExpense
 
+
 @admin.register(Expense)
 class ExpenseAdmin(admin.ModelAdmin):
     exclude = ('user',)
-    list_display = ('type','value','method','date',)
+    list_display = ('type', 'value', 'method', 'date',)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        
+
         if db_field.name == 'type':
             # import pdb; pdb.set_trace()
             kwargs['queryset'] = TypeExpense.objects.filter(user=request.user)
 
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
-            
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

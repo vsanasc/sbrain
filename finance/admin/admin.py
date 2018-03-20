@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from finance.models import (
-		Installment,
-	)
+        Installment,
+    )
 
 admin.site.register(Installment)

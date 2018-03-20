@@ -3,35 +3,36 @@ from django.contrib import admin
 
 from finance.models import CreditCard, CreditCardBill
 
+
 @admin.register(CreditCard)
 class CreditCardAdmin(admin.ModelAdmin):
-	exclude = ('user',)
-	list_display = ('name', 'type', 'currency', 'limit',)
+    exclude = ('user',)
+    list_display = ('name', 'type', 'currency', 'limit',)
 
-	def save_model(self, request, obj, form, change):
-		obj.user = request.user
-		super().save_model(request, obj, form, change)
+    def save_model(self, request, obj, form, change):
+        obj.user = request.user
+        super().save_model(request, obj, form, change)
 
-	def get_queryset(self, request):
-		qs = super().get_queryset(request)
-		if not request.user.is_superuser:
-			return qs.filter(user=request.user)
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if not request.user.is_superuser:
+            return qs.filter(user=request.user)
 
-		return qs
+        return qs
 
 
 @admin.register(CreditCardBill)
 class CreditCardBillAdmin(admin.ModelAdmin):
-	exclude = ('user',)
-	list_display = ('credit_card','total',)
+    exclude = ('user',)
+    list_display = ('credit_card', 'total',)
 
-	def save_model(self, request, obj, form, change):
-		obj.user = request.user
-		super().save_model(request, obj, form, change)
+    def save_model(self, request, obj, form, change):
+        obj.user = request.user
+        super().save_model(request, obj, form, change)
 
-	def get_queryset(self, request):
-		qs = super().get_queryset(request)
-		if not request.user.is_superuser:
-			return qs.filter(user=request.user)
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if not request.user.is_superuser:
+            return qs.filter(user=request.user)
 
-		return qs
+        return qs
