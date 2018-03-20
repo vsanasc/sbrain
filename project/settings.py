@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 allowed = os.getenv('ALLOWED_HOSTS', None)
 
 if allowed:
-    ALLOWED_HOSTS = os.environ['HOME'].split(' ')
+    ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(' ')
 
 # Application definition
 
