@@ -2,6 +2,7 @@ from django.db import models
 
 from .choices import STATUS_CHOICES
 
+
 class Phrase(models.Model):
     text = models.CharField(max_length=100)
     lang = models.CharField(max_length=2)
