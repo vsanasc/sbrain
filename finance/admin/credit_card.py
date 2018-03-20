@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 
-from finances.models import CreditCard, CreditCardBill
+from finance.models import CreditCard, CreditCardBill
 
 @admin.register(CreditCard)
 class CreditCardAdmin(admin.ModelAdmin):

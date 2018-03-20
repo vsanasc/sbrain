@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('paid', models.DateTimeField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('credit_card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='finances.CreditCard')),
+                ('credit_card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='finance.CreditCard')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
                 ('method', models.PositiveSmallIntegerField(choices=[(1, 'cash'), (2, 'credit_card'), (3, 'check')])),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('credit_card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='finances.CreditCard')),
+                ('credit_card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='finance.CreditCard')),
             ],
         ),
         migrations.CreateModel(
@@ -88,13 +88,13 @@ class Migration(migrations.Migration):
                 ('rank', models.PositiveSmallIntegerField(default=5, validators=[django.core.validators.MaxValueValidator(10), django.core.validators.MinValueValidator(1)])),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='finances.CategoryTypeExpense')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='finance.CategoryTypeExpense')),
             ],
         ),
         migrations.AddField(
             model_name='expense',
             name='type',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='finances.TypeExpense'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='finance.TypeExpense'),
         ),
         migrations.AddField(
             model_name='expense',

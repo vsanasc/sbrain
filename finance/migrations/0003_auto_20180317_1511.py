@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('finances', '0002_creditcard_currency'),
+        ('finance', '0002_creditcard_currency'),
     ]
 
     operations = [

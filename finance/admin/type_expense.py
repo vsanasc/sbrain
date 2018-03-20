@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from finances.models import (
+from finance.models import (
 		CategoryTypeExpense,
 		TypeExpense
 	)

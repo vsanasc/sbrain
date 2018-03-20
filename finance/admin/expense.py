@@ -1,18 +1,18 @@
 
 from django.contrib import admin
+from finance.models import Expense
 
-from finances.models import Income
 
-@admin.register(Income)
-class IncomeAdmin(admin.ModelAdmin):
+@admin.register(Expense)
+class ExpenseAdmin(admin.ModelAdmin):
 	exclude = ('user',)
-	list_display = ('name','value','date',)
+	list_display = ('type','value','method','date',)
 
 	def get_queryset(self, request):
 		qs = super().get_queryset(request)
 
 		if not request.user.is_superuser:
-			return qs.filter(user=request.user)
+			return qs.filter(user=request.user).order_by('-date')
 
 		return qs
 
