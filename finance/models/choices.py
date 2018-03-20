@@ -7,7 +7,6 @@ TYPE_CREDIT_CARD_CHOICES = (
     (4, _('another')),
 )
 
-
 METHOD_TYPE_CHOICES = (
     (1, _('cash')),
     (2, _('credit_card')),
