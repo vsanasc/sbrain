@@ -34,6 +34,7 @@ if 'ALLOWED_HOSTS' in os.environ:
 # Application definition
 
 INSTALLED_APPS = [
+    'raven.contrib.django.raven_compat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -102,6 +103,16 @@ if 'TRAVIS' in os.environ:
             'HOST':     'localhost',
             'PORT':     '',
         }
+    }
+
+if DEBUG == False:
+    import raven
+    
+    RAVEN_CONFIG = {
+        'dsn': 'https://790ceadf533f477a93705847e40eaa6d:9b2c756e27ac43b6b7341d5cefbb07bd@sentry.io/328879',
+        # If you are using git, you can also automatically configure the
+        # release based on the git info.
+        'release': raven.fetch_git_sha(BASE_DIR),
     }
 
 # Password validation
