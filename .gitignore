@@ -100,9 +100,13 @@ ENV/
 # mypy
 .mypy_cache/
 
+# Size files
 *.zip
 *.sqlite3
-local_settings.py
+*.sql
+
+# Docker
+.postgres-data/
 
 
 
