@@ -9,6 +9,10 @@ Get the latest project clone to your computer:
 $ git clone git@github.com:sbrainproject/sbrain.git
 ```
 
+```bash
+$ cp .env-sample .env
+```
+
 Run docker-compose commands to start containers:
 ```bash
 $ docker-compose up
