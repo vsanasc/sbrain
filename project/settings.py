@@ -19,10 +19,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'yasf1ys-$3mb=5yi=p4_bbx2lmtt37pjdv6x!4ftf=g)vc%wrx'
+SECRET_KEY = os.getenv('SECRET_KEY','yasf1ys-$3mb=5yi=p4_bbx2lmtt37pjdv6x!4ftf=g)vc%wrx')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG'] == 'True' if 'DEBUG' in os.environ else False
+DEBUG = os.getenv('DEBUG', 'NO').lower() in ('on', 'true', 'y', 'yes')
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -34,7 +34,6 @@ if 'ALLOWED_HOSTS' in os.environ:
 # Application definition
 
 INSTALLED_APPS = [
-    'raven.contrib.django.raven_compat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,43 +77,33 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(conn_max_age=600)
 }
 
-DATABASE_URL = os.getenv('DATABASE_URL', None)
+if not DEBUG and os.getenv('RAVEN_DNS'):
 
-if DATABASE_URL:
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
-
-if 'TRAVIS' in os.environ:
-
-    DATABASES = {
-        'default': {
-            'ENGINE':   'django.db.backends.postgresql_psycopg2',
-            'NAME':     'travisdb',
-            'USER':     'postgres',
-            'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
-        }
-    }
-
-if not DEBUG:
-
+    
     import raven
+    source_path = None
+    try:
+        source_path = os.getenv('SOURCE_VERSION', raven.fetch_git_sha(BASE_DIR))
+    except raven.exceptions.InvalidGitRepository:
+        print('There isn\'t git access')
+    else:
+        
+        RAVEN_CONFIG = {
+            'dsn': os.getenv('RAVEN_DNS'),
+            # If you are using git, you can also automatically configure the
+            # release based on the git info.
+            'release': source_path,
+        }
 
-    RAVEN_CONFIG = {
-        'dsn': 'https://790ceadf533f477a93705847e40eaa6d:9b2c756e27ac43b6b7341d5cefbb07bd@sentry.io/328879',
-        # If you are using git, you can also automatically configure the
-        # release based on the git info.
-        'release': raven.fetch_git_sha(BASE_DIR),
-    }
+        INSTALLED_APPS = INSTALLED_APPS + [
+            'raven.contrib.django.raven_compat',
+        ]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -153,13 +142,13 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 # STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, 'static'),
 # )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-try:
-    from .local_settings import *
-except ImportError as e:
-    pass
+
