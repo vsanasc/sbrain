@@ -1,6 +1,9 @@
+
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
+
+from core.model import BaseModel
 
 from .choices import (
     TYPE_CREDIT_CARD_CHOICES,
@@ -8,7 +11,7 @@ from .choices import (
 )
 
 
-class CreditCard(models.Model):
+class CreditCard(BaseModel):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -32,14 +35,11 @@ class CreditCard(models.Model):
         choices=CURRENCY_CHOICES
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return self.name
 
 
-class CreditCardBill(models.Model):
+class CreditCardBill(BaseModel):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -54,8 +54,6 @@ class CreditCardBill(models.Model):
     total = models.PositiveIntegerField()
     paid = models.DateTimeField()
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '{} {}'.format(

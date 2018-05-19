@@ -6,8 +6,8 @@ urlpatterns = [
     
     re_path(
         r'finance/dashboard/',
-        DashboardUrls
-        # name='dashboard'
+        include(DashboardUrls),
+        name='dashboard'
     )
 
 ]

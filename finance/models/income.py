@@ -1,12 +1,14 @@
 
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
+from core.model import BaseModel
 
 from datetime import date as dat
 from .choices import CURRENCY_CHOICES
 
 
-class Income(models.Model):
+class Income(BaseModel):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -20,9 +22,6 @@ class Income(models.Model):
         default='USD',
         choices=CURRENCY_CHOICES
     )
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

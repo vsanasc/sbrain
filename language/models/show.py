@@ -1,30 +1,20 @@
 from django.db import models
 
-from .choices import STATUS_CHOICES
+from core.model import BaseModel
 
 
-class Producer(models.Model):
-    name = models.CharField(max_length=50)
-
-    # extras
-    created_at = models.DateTimeField(auto_now=True)
-    modified_at = models.DateTimeField(auto_now_add=True)
-    status = models.SmallIntegerField(choices=STATUS_CHOICES)
-
-
-class Production(models.Model):
+class Producer(BaseModel):
     name = models.CharField(max_length=50)
 
 
-class Season(models.Model):
+class Production(BaseModel):
+    name = models.CharField(max_length=50)
+
+
+class Season(BaseModel):
     producer = models.ForeignKey('Production', on_delete=models.CASCADE)
 
 
-class Episode(models.Model):
+class Episode(BaseModel):
     season = models.ForeignKey('Season', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-
-    # extras
-    created_at = models.DateTimeField(auto_now=True)
-    modified_at = models.DateTimeField(auto_now_add=True)
-    status = models.SmallIntegerField(choices=STATUS_CHOICES)
