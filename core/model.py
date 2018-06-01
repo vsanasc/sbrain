@@ -9,4 +9,4 @@ class BaseModel(models.Model):
     status = models.SmallIntegerField(choices=STATUS_CHOICES)
 
     class Meta:
-        abstract=True
+        abstract = True
