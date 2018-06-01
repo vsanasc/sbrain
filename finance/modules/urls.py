@@ -1,12 +1,14 @@
-from django.urls import re_path, include
+from django.urls import path, include
 
-from .dashboard import urls as DashboardUrls
+from .views import WrapperView
+
+from finance.modules.dashboard.factories import TableViewFactory
 
 urlpatterns = [
     
-    re_path(
-        r'finance/dashboard/',
-        include(DashboardUrls),
+    path(
+        'api/table/<int:year>/<int:month>/<int:before>/<int:after>/',
+        WrapperView.as_view(view_factory=TableViewFactory),
         name='dashboard'
     )
 
