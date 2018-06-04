@@ -153,4 +153,6 @@ MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+if DEBUG:
 
+    AUTH_PASSWORD_VALIDATORS = []
