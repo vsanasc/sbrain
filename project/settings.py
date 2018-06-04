@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'language.apps.LanguageConfig',
     'finance.apps.FinanceConfig',
+    'diary.apps.DiaryConfig'
 ]
 
 MIDDLEWARE = [
