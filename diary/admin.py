@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from django import forms
 from diary.models import (
     Date,
     Dedication,
@@ -12,27 +12,127 @@ from diary.models import (
     TypeTask
 )
 
-
 class SmallNoteInline(admin.TabularInline):
     model = SmallNote
     extra = 0
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        
+        if (
+            db_field.name == 'type'
+        ):
+
+            try:
+                kwargs['queryset'] = Role.objects.filter(
+                                                    user=request.user,
+                                                    status=1
+                                                )
+            except IndexError:
+                pass
+
+        return super(
+                SmallNoteInline,
+                self
+            ).formfield_for_foreignkey(
+                db_field,
+                request,
+                **kwargs
+            )
 
 
 class ScheduleInline(admin.TabularInline):
     model = Schedule
     extra = 0
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        
+        if (
+            db_field.name == 'type'
+        ):
+
+            try:
+                kwargs['queryset'] = TypeSchedule.objects.filter(
+                                                    user=request.user,
+                                                    status=1
+                                                )
+            except IndexError:
+                pass
+
+        return super(
+                ScheduleInline,
+                self
+            ).formfield_for_foreignkey(
+                db_field,
+                request,
+                **kwargs
+            )
+
 
 class DedicationInline(admin.TabularInline):
     model = Dedication
     extra = 0
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        
+        if (
+            db_field.name == 'type'
+        ):
+
+            try:
+                kwargs['queryset'] = TypeDedication.objects.filter(
+                                                    user=request.user,
+                                                    status=1
+                                                )
+            except IndexError:
+                pass
+
+        return super(
+                DedicationInline,
+                self
+            ).formfield_for_foreignkey(
+                db_field,
+                request,
+                **kwargs
+            )
+
+class TaskInline(admin.TabularInline):
+    model = Task
+    extra = 0
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        
+        if (
+            db_field.name == 'type'
+        ):
+
+            try:
+                kwargs['queryset'] = TypeTask.objects.filter(
+                                                    user=request.user,
+                                                    status=1
+                                                )
+            except IndexError:
+                pass
+
+        return super(
+                TaskInline,
+                self
+            ).formfield_for_foreignkey(
+                db_field,
+                request,
+                **kwargs
+            )
 
 
 @admin.register(Date)
 class DateAdmin(admin.ModelAdmin):
     exclude = ('user',)
     list_display = ('date', 'stars',)
-    inlines = [SmallNoteInline, ScheduleInline, DedicationInline]
+    inlines = [
+                SmallNoteInline,
+                TaskInline,
+                ScheduleInline,
+                DedicationInline,
+            ]
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
