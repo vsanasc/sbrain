@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 
-from core.model import BaseModel
+from core.models import BaseModel
 
 from datetime import date as dat
 
