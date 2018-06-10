@@ -13,6 +13,7 @@ from diary.models import (
 )
 
 class SmallNoteInline(admin.TabularInline):
+    exclude = ('status',)
     model = SmallNote
     extra = 1
 
@@ -41,6 +42,7 @@ class SmallNoteInline(admin.TabularInline):
 
 
 class ScheduleInline(admin.TabularInline):
+    exclude = ('status',)
     model = Schedule
     extra = 1
 
@@ -69,6 +71,7 @@ class ScheduleInline(admin.TabularInline):
 
 
 class DedicationInline(admin.TabularInline):
+    exclude = ('status',)
     model = Dedication
     extra = 1
 
@@ -96,6 +99,7 @@ class DedicationInline(admin.TabularInline):
             )
 
 class TaskInline(admin.TabularInline):
+    exclude = ('status',)
     model = Task
     extra = 1
 
