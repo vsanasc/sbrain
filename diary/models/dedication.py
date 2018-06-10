@@ -2,7 +2,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from django.db import models
 
-from core.model import BaseModel
+from core.models import BaseModel, Tag
 
 
 class Dedication(BaseModel):
@@ -26,5 +26,5 @@ class Dedication(BaseModel):
             MinValueValidator(10)
         ]
     )
-    comment = models.CharField(max_length=150)
+    tags = models.ManyToManyField(Tag)
 
