@@ -14,7 +14,7 @@ from diary.models import (
 
 class SmallNoteInline(admin.TabularInline):
     model = SmallNote
-    extra = 0
+    extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         
@@ -42,7 +42,7 @@ class SmallNoteInline(admin.TabularInline):
 
 class ScheduleInline(admin.TabularInline):
     model = Schedule
-    extra = 0
+    extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         
@@ -70,7 +70,7 @@ class ScheduleInline(admin.TabularInline):
 
 class DedicationInline(admin.TabularInline):
     model = Dedication
-    extra = 0
+    extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         
@@ -97,7 +97,7 @@ class DedicationInline(admin.TabularInline):
 
 class TaskInline(admin.TabularInline):
     model = Task
-    extra = 0
+    extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         
