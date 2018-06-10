@@ -1,7 +1,9 @@
-# Frameworks
+# Django
+django-jet==1.0.7
 Django==2.0
+
+# Frameworks
 djangorestframework==3.7.3
-# Markdown==2.6.10
 
 # Database
 dj-database-url==0.5.0

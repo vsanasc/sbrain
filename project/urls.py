@@ -19,7 +19,10 @@ from django.urls import path, include
 # from app import urls as AppUrls
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),
+    path('tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('', include('language.urls')),
-    path('', include('finance.modules.urls'))
+    path('', include('finance.modules.urls')),
+    path('', include('diary.modules.urls'))
 ]

@@ -34,6 +34,7 @@ if 'ALLOWED_HOSTS' in os.environ:
 # Application definition
 
 INSTALLED_APPS = [
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,10 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'core',
+    'core.apps.CoreConfig',
     'language.apps.LanguageConfig',
     'finance.apps.FinanceConfig',
-    'diary.apps.DiaryConfig'
+    'diary.apps.DiaryConfig',
+    'tinymce'
 ]
 
 MIDDLEWARE = [
