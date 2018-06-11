@@ -11,7 +11,7 @@ urlpatterns = [
     path(
         'api-diary/date/<int:year>/<int:month>/<int:day>/',
         WrapperView.as_view(view_factory=DateViewFactory),
-        name='diary'
+        name='diary-date'
     )
 
 ]
