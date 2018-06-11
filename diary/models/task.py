@@ -13,4 +13,7 @@ class Task(BaseModel):
         'TypeTask',
         on_delete=models.CASCADE
     )
-
+    observation = models.CharField(
+        max_length=200,
+        blank=True
+    )
