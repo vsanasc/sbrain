@@ -4,6 +4,7 @@ from tinymce.models import HTMLField
 
 from core.models import BaseModel
 
+
 class SmallNote(BaseModel):
     date = models.ForeignKey(
         'Date',

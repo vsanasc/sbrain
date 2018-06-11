@@ -76,7 +76,7 @@ class DateRepo(object):
                             month,
                             day
                         )
-                        
+
             self.cache_repo.save_date(date)
 
         return date

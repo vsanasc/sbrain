@@ -11,13 +11,14 @@ from diary.models import (
     TypeTask
 )
 
+
 class SmallNoteInline(admin.TabularInline):
     exclude = ('status',)
     model = SmallNote
     extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        
+
         if (
             db_field.name == 'type'
         ):
@@ -46,7 +47,7 @@ class ScheduleInline(admin.TabularInline):
     extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        
+
         if (
             db_field.name == 'type'
         ):
@@ -75,7 +76,7 @@ class DedicationInline(admin.TabularInline):
     extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        
+
         if (
             db_field.name == 'type'
         ):
@@ -97,13 +98,14 @@ class DedicationInline(admin.TabularInline):
                 **kwargs
             )
 
+
 class TaskInline(admin.TabularInline):
     exclude = ('status',)
     model = Task
     extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        
+
         if (
             db_field.name == 'type'
         ):
@@ -182,6 +184,7 @@ class GeneralTypeAdmin(admin.ModelAdmin):
 
         return qs
 
+
 @admin.register(TypeSchedule)
 class TypeScheduleAdmin(admin.ModelAdmin):
     exclude = ('user',)
@@ -197,4 +200,3 @@ class TypeScheduleAdmin(admin.ModelAdmin):
             return qs.filter(user=request.user)
 
         return qs
-

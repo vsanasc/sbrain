@@ -14,7 +14,6 @@ class WrapperView(LoginRequiredMixin, View):
 
         return JsonResponse(body, status=status)
 
-
     def post(self, request, *args, **kwargs):
         kwargs.update(request.GET)
         kwargs.update(request.POST)

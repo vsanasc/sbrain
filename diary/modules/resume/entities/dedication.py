@@ -1,6 +1,7 @@
 
 import datetime
 
+
 class BaseDedicationEntity(object):
 
     def __init__(self, name, dedications):
@@ -19,7 +20,7 @@ class BaseDedicationEntity(object):
 class DedicationEntity(object):
 
     def __init__(self, cycle, time, tags):
-        self._cycle = cycle                
+        self._cycle = cycle
         self._time = time
         self._tags = tags
         self._total_minutes = cycle * time
@@ -36,7 +37,7 @@ class DedicationEntity(object):
     @property
     def time(self):
         return self._time
-    
+
     @property
     def tags(self):
         return self._tags
@@ -44,8 +45,7 @@ class DedicationEntity(object):
     @property
     def total_minutes(self):
         return self._total_minutes
-    
+
     @property
     def total_time(self):
         return self._total_time
-    

@@ -1,5 +1,6 @@
 from diary.modules.resume.serializers import DateSerializer
 
+
 class DateView(object):
 
     def __init__(self, interactor):

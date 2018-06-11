@@ -3,6 +3,7 @@ from django.db import models
 
 from .choices import STATUS_CHOICES
 
+
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -11,6 +12,7 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
 
 class Tag(BaseModel):
     user = models.ForeignKey(

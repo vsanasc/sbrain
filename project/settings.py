@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import raven
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,7 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY','yasf1ys-$3mb=5yi=p4_bbx2lmtt37pjdv6x!4ftf=g)vc%wrx')
+SECRET_KEY = os.getenv(
+                        'SECRET_KEY',
+                        'yasf1ys-$3mb=5yi=p4_bbx2lmtt37pjdv6x!4ftf=g)vc%wrx'
+                    )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'NO').lower() in ('on', 'true', 'y', 'yes')
@@ -81,7 +86,6 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600)
@@ -89,15 +93,13 @@ DATABASES = {
 
 if not DEBUG and os.getenv('RAVEN_DNS'):
 
-    
-    import raven
     source_path = None
     try:
         source_path = os.getenv('SOURCE_VERSION', raven.fetch_git_sha(BASE_DIR))
     except raven.exceptions.InvalidGitRepository:
         print('There isn\'t git access')
     else:
-        
+
         RAVEN_CONFIG = {
             'dsn': os.getenv('RAVEN_DNS'),
             # If you are using git, you can also automatically configure the

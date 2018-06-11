@@ -1,5 +1,4 @@
 
-
 class TagEntity(object):
 
     def __init__(self, id, name):
@@ -10,8 +9,6 @@ class TagEntity(object):
     def id(self):
         return self._id
 
-
     @property
     def name(self):
         return self._name
-     

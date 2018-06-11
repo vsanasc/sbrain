@@ -3,6 +3,7 @@ from .note import NoteSerializer
 from .task import TaskSerializer
 from .schedule import ScheduleSerializer
 
+
 class DateSerializer(object):
 
     @staticmethod

@@ -23,6 +23,6 @@ class TaskSerializer(object):
                 {
                     'name': t.name,
                     'text': t.text
-                } 
+                }
                 for t in tasks
         ]

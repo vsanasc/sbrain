@@ -7,7 +7,7 @@ from diary.modules.resume.factories import (
 from .views import WrapperView
 
 urlpatterns = [
-    
+
     path(
         'api-diary/date/<int:year>/<int:month>/<int:day>/',
         WrapperView.as_view(view_factory=DateViewFactory),

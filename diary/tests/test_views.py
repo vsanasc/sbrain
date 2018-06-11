@@ -24,17 +24,16 @@ class TestViews(TestCase):
 
     def setUp(self):
 
-
         user = User(email='test@django.com', username='testuser')
         user.set_password('test')
         user.is_staff = True
         user.is_super = True
         user.save()
-        
+
         today = datetime.date.today()
 
         date = Date(user=user, date=today)
-        
+
         AutoFixture(Tag).create(10)
         AutoFixture(TypeTask).create(10)
         AutoFixture(TypeSchedule).create(10)
@@ -49,7 +48,6 @@ class TestViews(TestCase):
         self._today = today
 
     def test_diary_without_user(self):
-        
 
         url = reverse('diary-date', kwargs={
                           'year': self._today.year,
@@ -62,9 +60,9 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_diary_with_user(self):
-        
+
         # Login
-        self.client.login(username='testuser', password='test') 
+        self.client.login(username='testuser', password='test')
 
         url = reverse('diary-date', kwargs={
                           'year': self._today.year,
@@ -76,4 +74,3 @@ class TestViews(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'application/json')
-

@@ -11,7 +11,7 @@ class DedicationSerializer(object):
 
         values = []
         list_types = list(query.values_list('type__name', flat=True))
-        types = dict((el,[]) for el in list_types)
+        types = dict((el, []) for el in list_types)
 
         for d in query:
             entity = DedicationEntity(
@@ -21,7 +21,7 @@ class DedicationSerializer(object):
                     {
                         'slug': t.slug,
                         'name': t.name
-                    } 
+                    }
                     for t in d.tags.all()
                 ]
             )

@@ -23,6 +23,6 @@ class ScheduleSerializer(object):
                 {
                     'name': t.type_name,
                     'time': t.time
-                } 
+                }
                 for t in schedules
         ]

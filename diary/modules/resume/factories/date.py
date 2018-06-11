@@ -12,17 +12,20 @@ from diary.modules.resume.interactors import (
     GetDateInteractor
 )
 
+
 class DateDatabaseRepoFactory(object):
 
     @staticmethod
     def get():
         return DateDatabaseRepo()
 
+
 class DateCacheRepoFactory(object):
 
     @staticmethod
     def get():
         return DateCacheRepo()
+
 
 class DateRepoFactory(object):
 
@@ -31,6 +34,7 @@ class DateRepoFactory(object):
         db_repo = DateDatabaseRepoFactory.get()
         cache_repo = DateCacheRepoFactory.get()
         return DateRepo(db_repo, cache_repo)
+
 
 class GetDateInteractorFactory(object):
 

@@ -1,3 +1,4 @@
+
 class BaseNoteEntity(object):
 
     def __init__(self, name, notes):
@@ -31,6 +32,3 @@ class NoteEntity(object):
     @property
     def featured(self):
         return self._featured
-
-    
-    

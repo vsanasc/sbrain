@@ -1,5 +1,4 @@
 
-
 class GetDateInteractor(object):
 
     def __init__(self, repo):
