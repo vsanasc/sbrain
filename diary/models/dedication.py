@@ -11,7 +11,7 @@ class Dedication(BaseModel):
         on_delete=models.CASCADE
     )
     type = models.ForeignKey(
-        'TypeDedication',
+        'GeneralType',
         on_delete=models.CASCADE
     )
     cycle = models.PositiveSmallIntegerField(
@@ -26,5 +26,7 @@ class Dedication(BaseModel):
             MinValueValidator(10)
         ]
     )
-    tags = models.ManyToManyField(Tag)
-
+    tags = models.ManyToManyField(
+        Tag,
+        blank=True
+    )

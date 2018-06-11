@@ -4,7 +4,7 @@ from django.db import models
 from core.models import BaseModel
 
 
-class Role(BaseModel):
+class GeneralType(BaseModel):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE

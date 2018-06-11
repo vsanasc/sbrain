@@ -3,8 +3,7 @@ from django import forms
 from diary.models import (
     Date,
     Dedication,
-    TypeDedication,
-    Role,
+    GeneralType,
     Schedule,
     TypeSchedule,
     SmallNote,
@@ -24,7 +23,7 @@ class SmallNoteInline(admin.TabularInline):
         ):
 
             try:
-                kwargs['queryset'] = Role.objects.filter(
+                kwargs['queryset'] = GeneralType.objects.filter(
                                                     user=request.user,
                                                     status=1
                                                 )
@@ -82,7 +81,7 @@ class DedicationInline(admin.TabularInline):
         ):
 
             try:
-                kwargs['queryset'] = TypeDedication.objects.filter(
+                kwargs['queryset'] = GeneralType.objects.filter(
                                                     user=request.user,
                                                     status=1
                                                 )
@@ -166,34 +165,18 @@ class TypeTaskAdmin(admin.ModelAdmin):
 
         return qs
 
-@admin.register(TypeDedication)
-class TypeDedicationAdmin(admin.ModelAdmin):
+
+@admin.register(GeneralType)
+class GeneralTypeAdmin(admin.ModelAdmin):
     exclude = ('user',)
     list_display = ('name',)
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
-        super(TypeDedicationAdmin, self).save_model(request, obj, form, change)
+        super(GeneralTypeAdmin, self).save_model(request, obj, form, change)
 
     def get_queryset(self, request):
-        qs = super(TypeDedicationAdmin, self).get_queryset(request)
-        if not request.user.is_superuser:
-            return qs.filter(user=request.user)
-
-        return qs
-
-
-@admin.register(Role)
-class RoleAdmin(admin.ModelAdmin):
-    exclude = ('user',)
-    list_display = ('name',)
-
-    def save_model(self, request, obj, form, change):
-        obj.user = request.user
-        super(RoleAdmin, self).save_model(request, obj, form, change)
-
-    def get_queryset(self, request):
-        qs = super(RoleAdmin, self).get_queryset(request)
+        qs = super(GeneralTypeAdmin, self).get_queryset(request)
         if not request.user.is_superuser:
             return qs.filter(user=request.user)
 

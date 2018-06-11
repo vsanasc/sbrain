@@ -10,7 +10,7 @@ class SmallNote(BaseModel):
         on_delete=models.CASCADE
     )
     role = models.ForeignKey(
-        'Role',
+        'GeneralType',
         on_delete=models.CASCADE
     )
     text = HTMLField()
