@@ -20,7 +20,7 @@ class SmallNoteInline(admin.TabularInline):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
 
         if (
-            db_field.name == 'type'
+            db_field.name == 'role'
         ):
 
             try:
