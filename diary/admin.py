@@ -159,9 +159,9 @@ class DateAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(DateAdmin, self).get_queryset(request)
         if not request.user.is_superuser:
-            return qs.filter(user=request.user).order_by('date')
+            return qs.filter(user=request.user).order_by('-date')
 
-        return qs.order_by('date')
+        return qs.order_by('-date')
 
 
 @admin.register(TypeTask)
