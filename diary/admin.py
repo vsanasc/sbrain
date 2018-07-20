@@ -90,6 +90,17 @@ class DedicationInline(admin.TabularInline):
             except IndexError:
                 pass
 
+        return super(
+                DedicationInline,
+                self
+            ).formfield_for_foreignkey(
+                db_field,
+                request,
+                **kwargs
+            )
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+
         if (
             db_field.name == 'tags'
         ):
