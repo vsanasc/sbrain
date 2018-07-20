@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from core.models import Tag
 from diary.models import (
     Date,
     Dedication,
@@ -89,6 +90,18 @@ class DedicationInline(admin.TabularInline):
             except IndexError:
                 pass
 
+        if (
+            db_field.name == 'tags'
+        ):
+
+            try:
+                kwargs['queryset'] = Tag.objects.filter(
+                                                    user=request.user,
+                                                    status=1
+                                                )
+            except IndexError:
+                pass
+
         return super(
                 DedicationInline,
                 self
@@ -148,7 +161,7 @@ class DateAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             return qs.filter(user=request.user)
 
-        return qs
+        return qs.order_by('date')
 
 
 @admin.register(TypeTask)
