@@ -13,13 +13,12 @@ class DateView(object):
         month = kwargs.get('month')
         day = kwargs.get('day')
 
-        date = self.interactor \
-                .set_params(
-                    user,
-                    year,
-                    month,
-                    day
-                ).execute()
+        date = self.interactor.set_params(
+                                            user,
+                                            year,
+                                            month,
+                                            day
+                                        ).execute()
 
         body = DateSerializer.serialize(date)
         status = 200

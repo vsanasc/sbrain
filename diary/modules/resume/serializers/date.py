@@ -10,20 +10,16 @@ class DateSerializer(object):
     def serialize(date):
 
         return {
-            'dedications': DedicationSerializer \
-                            .dataclass_to_dict(
+            'dedications': DedicationSerializer.dataclass_to_dict(
                                 date.dedications
                             ),
-            'notes': NoteSerializer \
-                            .dataclass_to_dict(
+            'notes': NoteSerializer.dataclass_to_dict(
                                 date.notes
                             ),
-            'tasks': TaskSerializer \
-                            .dataclass_to_dict(
+            'tasks': TaskSerializer.dataclass_to_dict(
                                 date.tasks
                             ),
-            'schedules': ScheduleSerializer \
-                            .dataclass_to_dict(
+            'schedules': ScheduleSerializer.dataclass_to_dict(
                                 date.schedules
                             )
         }
