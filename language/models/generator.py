@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 from core.models import BaseModel
 
+
 class Generator(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
