@@ -4,6 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 from core.models import BaseModel
 
+
 class CategoryTypeExpense(BaseModel):
     user = models.ForeignKey(
         User,
@@ -15,7 +16,6 @@ class CategoryTypeExpense(BaseModel):
     description = models.TextField(
             blank=True
         )
-
 
     def __str__(self):
         return self.name

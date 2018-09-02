@@ -54,7 +54,6 @@ class CreditCardBill(BaseModel):
     total = models.PositiveIntegerField()
     paid = models.DateTimeField()
 
-
     def __str__(self):
         return '{} {}'.format(
             self.total,

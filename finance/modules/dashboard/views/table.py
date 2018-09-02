@@ -1,5 +1,6 @@
 from finance.modules.dashboard.serializers import TableSerializer
 
+
 class TableView(object):
 
     def __init__(self, interactor):
@@ -13,8 +14,7 @@ class TableView(object):
         before = kwargs.get('before')
         after = kwargs.get('after')
 
-        table = self.interactor \
-                .set_params(
+        table = self.interactor.set_params(
                     user,
                     year,
                     month,

@@ -4,7 +4,7 @@ from finance.modules.dashboard.entities import TableEntity
 class TableDatabaseRepo(object):
 
     def get_table(self, user, year, month, before, after):
-        return TableEntity('','','')
+        return TableEntity('', '', '')
 
 
 class TableCacheRepo(object):

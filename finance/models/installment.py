@@ -5,6 +5,7 @@ from core.models import BaseModel
 
 from .choices import METHOD_TYPE_CHOICES
 
+
 class Installment(BaseModel):
     user = models.ForeignKey(
         User,

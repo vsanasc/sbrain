@@ -5,7 +5,6 @@ class GetTableInteractor(object):
     def __init__(self, repo):
         self.repo = repo
 
-
     def set_params(self, user, year, month, before, after):
         self.user = user
         self.year = year

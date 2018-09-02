@@ -12,17 +12,20 @@ from finance.modules.dashboard.interactors import (
     GetTableInteractor
 )
 
+
 class TableDatabaseRepoFactory(object):
 
     @staticmethod
     def get():
         return TableDatabaseRepo()
 
+
 class TableCacheRepoFactory(object):
 
     @staticmethod
     def get():
         return TableCacheRepo()
+
 
 class TableRepoFactory(object):
 
@@ -31,6 +34,7 @@ class TableRepoFactory(object):
         db_repo = TableDatabaseRepoFactory.get()
         cache_repo = TableCacheRepoFactory.get()
         return TableRepo(db_repo, cache_repo)
+
 
 class GetTableInteractorFactory(object):
 
