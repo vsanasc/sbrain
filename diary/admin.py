@@ -155,7 +155,7 @@ class TaskInline(admin.TabularInline):
 @admin.register(Date)
 class DateAdmin(admin.ModelAdmin):
     exclude = ('user',)
-    list_display = ('date', 'stars',)
+    list_display = ('date', 'stars', 'total_notes', 'proficiency_resume','proficiency_status')
     inlines = [
                 SmallNoteInline,
                 TaskInline,
