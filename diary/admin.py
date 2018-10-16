@@ -143,7 +143,7 @@ class HabitInline(admin.TabularInline):
                 pass
 
         return super(
-                TaskInline,
+                HabitInline,
                 self
             ).formfield_for_foreignkey(
                 db_field,
