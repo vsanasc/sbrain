@@ -1,5 +1,5 @@
 
-class TaskEntity(object):
+class HabitEntity(object):
 
     def __init__(self, name, text):
         self._name = name

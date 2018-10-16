@@ -4,6 +4,7 @@ from django.db import models
 
 from core.models import BaseModel
 
+from django.utils import timezone
 
 class Date(BaseModel):
     user = models.ForeignKey(
@@ -11,7 +12,7 @@ class Date(BaseModel):
         on_delete=models.CASCADE
     )
     resume = models.TextField(blank=True)
-    date = models.DateField()
+    date = models.DateField(default=timezone.now)
     stars = models.PositiveSmallIntegerField(
         default=3,
         validators=[
@@ -44,10 +45,16 @@ class Date(BaseModel):
         return "cycles: {} | time: {}H".format(cycles, time)
 
     def proficiency_status(self):
-        if self.total_notes() > 2 and self.total_dedication() >= 120:
+        notes = self.total_notes()
+        dedication = self.total_dedication()
+
+        if notes > 2 and dedication >= 120:
             return '✅'
-        else:
-            return '❌'
+        
+        if notes > 0 and dedication >= 30:
+            return '⚠️'
+        
+        return '❌'
 
 
 

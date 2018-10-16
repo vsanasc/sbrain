@@ -1,11 +1,11 @@
 from diary.modules.resume.entities import (
-    TaskEntity
+    HabitEntity
 )
 
 import datetime
 
 
-class TaskSerializer(object):
+class HabitSerializer(object):
 
     @staticmethod
     def orm_to_dataclass(query):
@@ -13,7 +13,7 @@ class TaskSerializer(object):
         values = []
 
         for t in query:
-            values.append(TaskEntity(t.type.name, t.observation))
+            values.append(HabitEntity(t.type.name, t.observation))
 
         return values
 

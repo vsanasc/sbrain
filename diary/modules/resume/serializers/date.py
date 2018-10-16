@@ -1,6 +1,6 @@
 from .dedication import DedicationSerializer
 from .note import NoteSerializer
-from .task import TaskSerializer
+from .habit import HabitSerializer
 from .schedule import ScheduleSerializer
 
 
@@ -16,8 +16,8 @@ class DateSerializer(object):
             'notes': NoteSerializer.dataclass_to_dict(
                                 date.notes
                             ),
-            'tasks': TaskSerializer.dataclass_to_dict(
-                                date.tasks
+            'habits': HabitSerializer.dataclass_to_dict(
+                                date.habits
                             ),
             'schedules': ScheduleSerializer.dataclass_to_dict(
                                 date.schedules

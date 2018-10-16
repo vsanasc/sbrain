@@ -2,10 +2,10 @@
 
 class DateEntity(object):
 
-    def __init__(self, dedications, notes, tasks, schedules):
+    def __init__(self, dedications, notes, habits, schedules):
         self._dedications = dedications
         self._notes = notes
-        self._tasks = tasks
+        self._habits = habits
         self._schedules = schedules
 
     @property
@@ -17,8 +17,8 @@ class DateEntity(object):
         return self._notes
 
     @property
-    def tasks(self):
-        return self._tasks
+    def habits(self):
+        return self._habits
 
     @property
     def schedules(self):

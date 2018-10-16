@@ -6,7 +6,7 @@ from diary.modules.resume.entities import (
 from diary.modules.resume.serializers import (
     DedicationSerializer,
     NoteSerializer,
-    TaskSerializer,
+    HabitSerializer,
     ScheduleSerializer
 )
 
@@ -14,7 +14,7 @@ from diary.models import (
     Dedication,
     Date,
     SmallNote,
-    Task,
+    Habit,
     Schedule
 )
 
@@ -32,13 +32,13 @@ class DateDatabaseRepo(object):
 
         dedications = Dedication.objects.filter(date=date_i, status=1)
         notes = SmallNote.objects.filter(date=date_i, status=1)
-        tasks = Task.objects.filter(date=date_i, status=1)
+        habits = Habit.objects.filter(date=date_i, status=1)
         schedules = Schedule.objects.filter(date=date_i, status=1)
 
         return DateEntity(
             DedicationSerializer.orm_to_dataclass(dedications),
             NoteSerializer.orm_to_dataclass(notes),
-            TaskSerializer.orm_to_dataclass(tasks),
+            HabitSerializer.orm_to_dataclass(habits),
             ScheduleSerializer.orm_to_dataclass(schedules)
         )
 
