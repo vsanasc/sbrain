@@ -8,6 +8,6 @@ from .note import (
     NoteEntity
 )
 from .schedule import ScheduleEntity
-from .task import (
-    TaskEntity
+from .habit import (
+    HabitEntity
 )
