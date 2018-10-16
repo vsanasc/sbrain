@@ -8,8 +8,8 @@ from diary.models import (
     Schedule,
     TypeSchedule,
     SmallNote,
-    Task,
-    TypeTask
+    Habit,
+    TypeHabit
 )
 
 
@@ -123,9 +123,9 @@ class DedicationInline(admin.TabularInline):
             )
 
 
-class TaskInline(admin.TabularInline):
+class HabitInline(admin.TabularInline):
     exclude = ('status',)
-    model = Task
+    model = Habit
     extra = 1
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -135,7 +135,7 @@ class TaskInline(admin.TabularInline):
         ):
 
             try:
-                kwargs['queryset'] = TypeTask.objects.filter(
+                kwargs['queryset'] = TypeHabit.objects.filter(
                                                     user=request.user,
                                                     status=1
                                                 )
@@ -158,7 +158,7 @@ class DateAdmin(admin.ModelAdmin):
     list_display = ('date', 'stars', 'total_notes', 'proficiency_resume','proficiency_status')
     inlines = [
                 SmallNoteInline,
-                TaskInline,
+                HabitInline,
                 ScheduleInline,
                 DedicationInline,
             ]
@@ -175,17 +175,17 @@ class DateAdmin(admin.ModelAdmin):
         return qs.order_by('-date')
 
 
-@admin.register(TypeTask)
-class TypeTaskAdmin(admin.ModelAdmin):
+@admin.register(TypeHabit)
+class TypeHabitAdmin(admin.ModelAdmin):
     exclude = ('user',)
     list_display = ('name',)
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
-        super(TypeTaskAdmin, self).save_model(request, obj, form, change)
+        super(TypeHabitAdmin, self).save_model(request, obj, form, change)
 
     def get_queryset(self, request):
-        qs = super(TypeTaskAdmin, self).get_queryset(request)
+        qs = super(TypeHabitAdmin, self).get_queryset(request)
         if not request.user.is_superuser:
             return qs.filter(user=request.user)
 
