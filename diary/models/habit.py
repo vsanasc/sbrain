@@ -4,13 +4,13 @@ from django.db import models
 from core.models import BaseModel
 
 
-class Task(BaseModel):
+class Habit(BaseModel):
     date = models.ForeignKey(
         'Date',
         on_delete=models.CASCADE
     )
     type = models.ForeignKey(
-        'TypeTask',
+        'TypeHabit',
         on_delete=models.CASCADE
     )
     observation = models.CharField(
