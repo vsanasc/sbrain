@@ -1,7 +1,7 @@
 from .choices import (
-        TYPE_CREDIT_CARD_CHOICES,
-        METHOD_TYPE_CHOICES
-    )
+    TYPE_CREDIT_CARD_CHOICES,
+    METHOD_TYPE_CHOICES
+)
 from .credit_card import CreditCard, CreditCardBill
 from .expense import Expense
 from .income import Income

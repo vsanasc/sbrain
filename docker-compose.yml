@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  web:
+    container_name: sbrain-django
+    build: .
+    command: python manage.py runserver -v 3 0.0.0.0:8000
+    restart: always
+    ports:
+      - "8000:8000"
+    links:
+      - postgres:postgres
+    depends_on:
+      - postgres
+    volumes:
+      - .:/code
+    env_file: .env
+
+  postgres:
+    container_name: sbrain-postgres
+    restart: always
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.postgres-data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres

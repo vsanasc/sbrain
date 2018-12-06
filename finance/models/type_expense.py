@@ -2,8 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from core.models import BaseModel
 
-class CategoryTypeExpense(models.Model):
+
+class CategoryTypeExpense(BaseModel):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -15,14 +17,11 @@ class CategoryTypeExpense(models.Model):
             blank=True
         )
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return self.name
 
 
-class TypeExpense(models.Model):
+class TypeExpense(BaseModel):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -43,9 +42,6 @@ class TypeExpense(models.Model):
         default=5,
         validators=[MaxValueValidator(10), MinValueValidator(1)]
     )
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

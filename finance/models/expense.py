@@ -1,8 +1,9 @@
 from django.db import models
-
 from django.contrib.auth.models import User
-
 from django.utils.translation import gettext as _
+
+from core.models import BaseModel
+
 from datetime import date as dat
 
 from .choices import (
@@ -11,7 +12,7 @@ from .choices import (
 )
 
 
-class Expense(models.Model):
+class Expense(BaseModel):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -42,9 +43,6 @@ class Expense(models.Model):
         blank=True,
         null=True
     )
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '{} - {}'.format(

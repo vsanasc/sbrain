@@ -54,8 +54,3 @@ LANGUAGES = {
     'vi': 'Vietnamese',
     'cy': 'Welsh'
 }
-
-STATUS_CHOICES = (
-    (0, 'Inactive'),
-    (1, 'Active'),
-)

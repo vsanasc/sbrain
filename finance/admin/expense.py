@@ -15,7 +15,14 @@ class ExpenseAdmin(admin.ModelAdmin):
             # import pdb; pdb.set_trace()
             kwargs['queryset'] = TypeExpense.objects.filter(user=request.user)
 
-        return super(ExpenseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        return super(
+                    ExpenseAdmin,
+                    self
+                ).formfield_for_foreignkey(
+                    db_field,
+                    request,
+                    **kwargs
+                )
 
     def get_queryset(self, request):
         qs = super(ExpenseAdmin, self).get_queryset(request)
