@@ -1,6 +1,6 @@
 # Django
 django-jet==1.0.7
-Django==2.0.8
+Django==2.1.4
 django-tinymce==2.7.0
 
 # Frameworks
