@@ -13,8 +13,8 @@ from diary.models import (
     Schedule,
     TypeSchedule,
     SmallNote,
-    Task,
-    TypeTask,
+    Habit,
+    TypeHabit,
 )
 
 import datetime
