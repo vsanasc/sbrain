@@ -51,12 +51,14 @@ INSTALLED_APPS = [
     'language.apps.LanguageConfig',
     'finance.apps.FinanceConfig',
     'diary.apps.DiaryConfig',
-    'tinymce'
+    'tinymce',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -65,6 +67,46 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'project.urls'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/api/.*$'
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
+
+TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'width': 'auto',
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': '.tinymce',
+    'theme': 'modern',
+    'plugins': '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1': '''
+            bold italic underline
+            | indent outdent | bullist numlist table |
+            | link  |
+            ''',
+    'toolbar2': '''
+            hr code fullscreen |
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': False,
+    'statusbar': False,
+    }
+
+
 
 TEMPLATES = [
     {
@@ -158,5 +200,9 @@ MEDIA_URL = '/media/'
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 if DEBUG:
+
+    STATICFILES_DIRS = (
+        # os.path.join(BASE_DIR, 'static'),
+    )
 
     AUTH_PASSWORD_VALIDATORS = []
