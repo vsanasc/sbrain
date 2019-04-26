@@ -1,22 +1,22 @@
-
 from django.contrib import admin
-from finance.models import Expense
-from finance.models import ExpenseType
+
+from finance.models import (
+    IncomeType
+)
 
 
-@admin.register(Expense)
-class ExpenseAdmin(admin.ModelAdmin):
+@admin.register(IncomeType)
+class IncomeTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'currency', 'created_at',)
     exclude = ('user',)
-    list_display = ('type', 'value', 'method', 'date',)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
 
         if db_field.name == 'type':
-            # import pdb; pdb.set_trace()
-            kwargs['queryset'] = ExpenseType.objects.filter(user=request.user)
+            kwargs['queryset'] = IncomeType.objects.filter(user=request.user)
 
         return super(
-                    ExpenseAdmin,
+                    IncomeTypeAdmin,
                     self
                 ).formfield_for_foreignkey(
                     db_field,
@@ -25,7 +25,7 @@ class ExpenseAdmin(admin.ModelAdmin):
                 )
 
     def get_queryset(self, request):
-        qs = super(ExpenseAdmin, self).get_queryset(request)
+        qs = super(IncomeTypeAdmin, self).get_queryset(request)
 
         if not request.user.is_superuser:
             return qs.filter(user=request.user).order_by('-date')
@@ -34,4 +34,4 @@ class ExpenseAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
-        super(ExpenseAdmin, self).save_model(request, obj, form, change)
+        super(IncomeTypeAdmin, self).save_model(request, obj, form, change)
