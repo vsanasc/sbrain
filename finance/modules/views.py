@@ -10,11 +10,11 @@ class WrapperView(View):
         kwargs.update(request.GET)
         body, status = self.view_factory.create().get(**kwargs)
 
-        return JsonResponse(body, status=status)
+        return JsonResponse(body, status=status, safe=False)
 
     def post(self, request, *args, **kwargs):
         kwargs.update(request.GET)
         kwargs.update(request.POST)
         body, status = self.view_factory.create().get(**kwargs)
 
-        return JsonResponse(body, status=status)
+        return JsonResponse(body, status=status, safe=False)
