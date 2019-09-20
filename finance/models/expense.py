@@ -7,7 +7,6 @@ from core.models import BaseModel
 from datetime import date as dat
 
 from .choices import (
-    CURRENCY_CHOICES,
     METHOD_TYPE_CHOICES
 )
 
@@ -18,8 +17,9 @@ class Expense(BaseModel):
         on_delete=models.CASCADE
     )
     type = models.ForeignKey(
-        'TypeExpense',
-        on_delete=models.CASCADE
+        'ExpenseType',
+        on_delete=models.CASCADE,
+        null=True
     )
     value = models.PositiveIntegerField()
     file = models.FileField(
@@ -28,11 +28,6 @@ class Expense(BaseModel):
     )
     date = models.DateField(
         default=dat.today
-    )
-    currency = models.CharField(
-        max_length=3,
-        default='USD',
-        choices=CURRENCY_CHOICES
     )
     method = models.PositiveSmallIntegerField(
         choices=METHOD_TYPE_CHOICES

@@ -1,20 +1,22 @@
 # Django
 django-jet==1.0.7
-Django==2.1.4
+Django>=2.1.11
 django-tinymce==2.7.0
+django-cors-headers==3.1.0
+django-filter==1.1.0
 
 # Frameworks
-djangorestframework==3.7.3
+djangorestframework>=3.9.1
 
 # Database
 dj-database-url==0.5.0
 psycopg2-binary==2.7.4
 
+# Utils
+python-dateutil==2.4.1
+
 # Error reporting
 raven==6.6.0
-
-# Filters
-django-filter==1.1.0
 
 # Production
 gunicorn==19.7.1

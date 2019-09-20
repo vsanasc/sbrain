@@ -7,7 +7,7 @@ from finance.models import Income
 @admin.register(Income)
 class IncomeAdmin(admin.ModelAdmin):
     exclude = ('user',)
-    list_display = ('name', 'value', 'date',)
+    list_display = ('value', 'date',)
 
     def get_queryset(self, request):
         qs = super(IncomeAdmin, self).get_queryset(request)

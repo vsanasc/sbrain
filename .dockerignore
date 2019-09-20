@@ -1,0 +1,14 @@
+.git
+Dockerfile
+.DS_Store
+.gitignore
+README.md
+.env*
+
+.deploy/
+.ebextensions/
+.elasticbeanstalk/
+.postgres-data/
+
+*.zip
+*.csv% 
