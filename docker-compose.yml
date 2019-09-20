@@ -1,6 +1,20 @@
 version: '3'
 
 services:
+  angular:
+    container_name: sbrain-angular
+    build: ./angular
+    command: npm start
+    volumes:
+      - ./angular:/code
+      - /usr/app/node_modules
+    depends_on:
+      - web
+    ports:
+      - "4200:4200"
+      - "9876:9876"
+    env_file: .env
+
   web:
     container_name: sbrain-django
     build: .
@@ -8,8 +22,6 @@ services:
     restart: always
     ports:
       - "8000:8000"
-    links:
-      - postgres:postgres
     depends_on:
       - postgres
     volumes:
