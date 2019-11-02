@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'language.apps.LanguageConfig',
     'finance.apps.FinanceConfig',
     'diary.apps.DiaryConfig',
+    'learn.apps.LearnConfig',
     'tinymce',
     'corsheaders'
 ]
