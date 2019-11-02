@@ -34,6 +34,16 @@ wheels/
 *.manifest
 *.spec
 
+# Statics
+static/admin/
+static/django_tinymce/
+static/jet/
+static/range_filter/
+static/rest_framework/
+static/staticfiles.json
+static/tiny_mce/
+
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
