@@ -8,14 +8,12 @@ services:
     volumes:
       - ./angular:/code
       - /usr/app/node_modules
-    depends_on:
-      - web
     ports:
       - "4200:4200"
       - "9876:9876"
     env_file: .env
 
-  web:
+  django:
     container_name: sbrain-django
     build: .
     command: python manage.py runserver 0.0.0.0:8000
